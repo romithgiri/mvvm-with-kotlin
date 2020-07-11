@@ -6,8 +6,13 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mvvm.adapter.RecyclerAdapter
+import com.example.mvvm.utils.RetroFitApiFunction
 import com.example.mvvm.viewmodels.CategoryViewModel
+import com.example.mvvm.viewmodels.Covid19ViewModel
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
     private lateinit var layoutManager: RecyclerView.LayoutManager
@@ -17,14 +22,14 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        var categoryViewModel: CategoryViewModel = ViewModelProviders.of(this).get(CategoryViewModel::class.java)
+        var covid19ViewModel: Covid19ViewModel = ViewModelProviders.of(this).get(Covid19ViewModel::class.java)
 
-        categoryViewModel.getArrayList().observe(this, Observer {categoryViewModel->
-            recyclerAdapter = RecyclerAdapter(this, categoryViewModel)
+        covid19ViewModel.getCovidDataForIndia()?.observe(this, Observer {covid19ViewModel->
+            recyclerAdapter = RecyclerAdapter(this, covid19ViewModel)
             layoutManager = LinearLayoutManager(this)
             recycler_view.layoutManager = layoutManager
             recycler_view!!.adapter = recyclerAdapter
         })
-
     }
+
 }

@@ -2,6 +2,10 @@ package com.example.mvvm.viewmodels
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.mvvm.models.Category
+import com.example.mvvm.utils.RetroFitApiFunction
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class CategoryViewModel : ViewModel {
     var title = ""
@@ -38,4 +42,20 @@ class CategoryViewModel : ViewModel {
         return arrayListMutableLiveData
     }
 
+    fun getCovidDataForIndia(): Unit? {
+        GlobalScope.launch(Dispatchers.IO){
+            val response = RetroFitApiFunction.api().getIndiaCovid19Data()
+            if (response.isSuccessful){
+                for (i in response.body()?.DataList!!){
+                    println(""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""")
+                    println(i)
+                    println("************************************************************************")
+                }
+            }else{
+                print("Error")
+            }
+        }
+        println("DDD2222")
+        return null
+    }
 }
