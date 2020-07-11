@@ -4,10 +4,10 @@ import com.google.gson.annotations.SerializedName
 
 data class Covid19DataClass(
     @SerializedName("cases_time_series")
-    var DataList: List<DataList2>? = null
+    var DataList: List<DataList>? = null
 )
 
-data class DataList2(
+data class DataList(
     @SerializedName("dailyconfirmed")
     var dailyconfirmed: String? = null,
     @SerializedName("dailydeceased")

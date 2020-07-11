@@ -1,6 +1,8 @@
 package com.example.mvvm
+import android.opengl.Visibility
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -22,9 +24,17 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        recycler_view.visibility = View.INVISIBLE
+        loader.visibility = View.VISIBLE
+
         var covid19ViewModel: Covid19ViewModel = ViewModelProviders.of(this).get(Covid19ViewModel::class.java)
 
         covid19ViewModel.getCovidDataForIndia()?.observe(this, Observer {covid19ViewModel->
+            println("Task bn:"+covid19ViewModel)
+            if (covid19ViewModel.isNotEmpty()){
+                recycler_view.visibility = View.VISIBLE
+                loader.visibility = View.INVISIBLE
+            }
             recyclerAdapter = RecyclerAdapter(this, covid19ViewModel)
             layoutManager = LinearLayoutManager(this)
             recycler_view.layoutManager = layoutManager

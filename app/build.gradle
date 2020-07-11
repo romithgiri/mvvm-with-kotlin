@@ -39,12 +39,20 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
-    def version= '1.1.1'
-    implementation "android.arch.lifecycle:extensions:$version"
-    annotationProcessor "android.arch.lifecycle:compiler:$version"
-    implementation 'androidx.recyclerview:recyclerview:1.1.0-beta04'
+    //Circle image
     implementation 'de.hdodenhof:circleimageview:2.2.0'
 
+    //RecyclerView
+    implementation 'androidx.recyclerview:recyclerview:1.1.0-beta04'
+
+    //Lifecycle
+    def version= '2.2.0'
+    implementation "android.arch.lifecycle:extensions:$version"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$version-beta01"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$version"
+    annotationProcessor "android.arch.lifecycle:compiler:$version"
+
+    //Coroutine
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.0.0'
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.0.0'
 
